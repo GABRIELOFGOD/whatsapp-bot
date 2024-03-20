@@ -4,8 +4,8 @@ const qrcode = require('qrcode')
 const express = require('express')
 const app = express()
 const client = new Client()
-
-app.get('/', async(req, res) => {
+const PORT = process.env.PORT
+app.get('/qrcode', async(req, res) => {
     client.on('qr', qr => {
         qrcode.toDataURL(qr, (err, qrOuput) => {
             if(err){
@@ -30,7 +30,6 @@ app.get('/', async(req, res) => {
     });
 })
 
-app.listen(3000)
 
 client.on('ready', () => {
     console.log('Client is Ready')
@@ -89,4 +88,7 @@ client.on('message', async message => {
         message.reply(response.text());
 })
 
+app.listen(PORT, () => {
+    console.log(`Server listening to http://localhost:${PORT}`);
+})
 

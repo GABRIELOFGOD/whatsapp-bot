@@ -21,7 +21,7 @@ const {
 } = require("@google/generative-ai");
   
 const MODEL_NAME = "gemini-1.0-pro";
-const API_KEY = "AIzaSyDbGnsHECJC63dcQB_SHz7mzJfg1-8kb7k";
+const API_KEY = process.env.GOOGLE_GEMINI;
 
 client.on('message', async message => {
         const genAI = new GoogleGenerativeAI(API_KEY);

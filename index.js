@@ -1,12 +1,36 @@
 const { Client } = require('whatsapp-web.js')
 require('dotenv').config()
-const qrcode = require('qrcode-terminal')
-
+const qrcode = require('qrcode')
+const express = require('express')
+const app = express()
 const client = new Client()
 
-client.on('qr', qr => {
-    qrcode.generate(qr,{small:true})
-});
+app.get('/', async(req, res) => {
+    client.on('qr', qr => {
+        qrcode.toDataURL(qr, (err, qrOuput) => {
+            if(err){
+                console.log('Error', err)
+            } else {
+                // console.log(qrOuput)
+                res.send(`<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>WhatsApp QR Code Display</title>
+                </head>
+                <body>
+                    <img id="qrCodeImage" src="${qrOuput}" alt="WhatsApp QR Code">
+                </body>
+                </html>
+                `)
+            }
+        })
+        
+    });
+})
+
+app.listen(3000)
 
 client.on('ready', () => {
     console.log('Client is Ready')

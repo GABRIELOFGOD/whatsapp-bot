@@ -72,6 +72,7 @@ const MODEL_NAME = "gemini-1.0-pro";
 const API_KEY = process.env.GOOGLE_GEMINI;
 
 client.on('message', async message => {
+    try {
         const genAI = new GoogleGenerativeAI(API_KEY);
         const model = genAI.getGenerativeModel({ model: MODEL_NAME });
     
@@ -111,6 +112,9 @@ client.on('message', async message => {
         const result = await chat.sendMessage(message.body);
         const response = result.response;
         message.reply(response.text());
+    } catch (error) {
+        message.reply('Something went wrong, try resending your message again in few minutes time. I sincerely apolize to you on GABRIEL\'s behalf. Keep on loving GABRIEL 💖')
+    }
 })
 
 app.listen(PORT, () => {

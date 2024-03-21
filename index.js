@@ -125,7 +125,7 @@ const server = app.listen(PORT, () => {
 })
 
 const keepAliveFunction = () => {
-    console.log('Keeping the server alive')
+    console.log('Keeping the server alive please')
 }
 
 const keepAliveInterval = setInterval(keepAliveFunction, 3000);

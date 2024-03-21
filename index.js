@@ -120,13 +120,21 @@ client.on('message', async message => {
     }
 })
 
+const server = app.listen(PORT, () => {
+    console.log(`Server listening to http://localhost:${PORT}`);
+})
+
 const keepAliveFunction = () => {
     console.log('Keeping the server alive')
 }
 
 const keepAliveInterval = setInterval(keepAliveFunction, 6000);
 
-app.listen(PORT, () => {
-    console.log(`Server listening to http://localhost:${PORT}`);
-})
+process.on('SIGTERM', () => {
+    console.log('Received SIGTERM, shutting down server');
+    clearInterval(keepAliveInterval);
+    server.close(() => {
+        console.log('Server has been gracefully shut down');
+    });
+});
 

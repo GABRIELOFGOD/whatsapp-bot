@@ -120,6 +120,12 @@ client.on('message', async message => {
     }
 })
 
+const keepAliveFunction = () => {
+    console.log('Keeping the server alive')
+}
+
+const keepAliveInterval = setInterval(keepAliveFunction, 6000);
+
 app.listen(PORT, () => {
     console.log(`Server listening to http://localhost:${PORT}`);
 })

@@ -5,7 +5,7 @@ const express = require('express')
 const app = express()
 const client = new Client()
 const PORT = process.env.PORT
-app.get('/qrcode', async(req, res) => {
+app.get('/', async(req, res) => {
     client.on('qr', qr => {
         qrcode.toDataURL(qr, (err, qrOuput) => {
             if(err){

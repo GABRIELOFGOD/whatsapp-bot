@@ -128,7 +128,7 @@ const keepAliveFunction = () => {
     console.log('Keeping the server alive')
 }
 
-const keepAliveInterval = setInterval(keepAliveFunction, 6000);
+const keepAliveInterval = setInterval(keepAliveFunction, 3000);
 
 process.on('SIGTERM', () => {
     console.log('Received SIGTERM, shutting down server');

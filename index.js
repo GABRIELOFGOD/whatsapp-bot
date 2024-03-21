@@ -5,13 +5,13 @@ const express = require('express')
 const app = express()
 const client = new Client()
 const PORT = process.env.PORT
-app.get('/', async(req, res) => {
-    client.on('qr', qr => {
-        qrcode.toDataURL(qr, (err, qrOuput) => {
-            if(err){
-                console.log('Error', err)
-            } else {
-                // console.log(qrOuput)
+
+client.on('qr', qr => {
+    qrcode.toDataURL(qr, (err, qrOuput) => {
+        if(err){
+            console.log('Error', err)
+        } else {
+            app.get('/', async(req, res) => {
                 res.send(`<!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -24,11 +24,36 @@ app.get('/', async(req, res) => {
                 </body>
                 </html>
                 `)
-            }
-        })
+            })
+        }
+    })
+    
+});
+
+// app.get('/', async(req, res) => {
+//     client.on('qr', qr => {
+//         qrcode.toDataURL(qr, (err, qrOuput) => {
+//             if(err){
+//                 console.log('Error', err)
+//             } else {
+//                 console.log(qrOuput)
+//                 res.send(`<!DOCTYPE html>
+//                 <html lang="en">
+//                 <head>
+//                     <meta charset="UTF-8">
+//                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//                     <title>WhatsApp QR Code Display</title>
+//                 </head>
+//                 <body>
+//                     <img id="qrCodeImage" src="${qrOuput}" alt="WhatsApp QR Code">
+//                 </body>
+//                 </html>
+//                 `)
+//             }
+//         })
         
-    });
-})
+//     });
+// })
 
 
 client.on('ready', () => {

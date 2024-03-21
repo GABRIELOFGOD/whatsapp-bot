@@ -114,6 +114,9 @@ client.on('message', async message => {
         message.reply(response.text());
     } catch (error) {
         message.reply('Something went wrong, try resending your message again in few minutes time. I sincerely apolize to you on GABRIEL\'s behalf. Keep on loving GABRIEL 💖')
+        if(error instanceof Error){
+            message.reply('Something went wrong, try resending your message again in few minutes time. I sincerely apolize to you on GABRIEL\'s behalf. Keep on loving GABRIEL 💖')
+        }
     }
 })
 

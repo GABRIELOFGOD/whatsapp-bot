@@ -30,32 +30,6 @@ client.on('qr', qr => {
     
 });
 
-// app.get('/', async(req, res) => {
-//     client.on('qr', qr => {
-//         qrcode.toDataURL(qr, (err, qrOuput) => {
-//             if(err){
-//                 console.log('Error', err)
-//             } else {
-//                 console.log(qrOuput)
-//                 res.send(`<!DOCTYPE html>
-//                 <html lang="en">
-//                 <head>
-//                     <meta charset="UTF-8">
-//                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//                     <title>WhatsApp QR Code Display</title>
-//                 </head>
-//                 <body>
-//                     <img id="qrCodeImage" src="${qrOuput}" alt="WhatsApp QR Code">
-//                 </body>
-//                 </html>
-//                 `)
-//             }
-//         })
-        
-//     });
-// })
-
-
 client.on('ready', () => {
     console.log('Client is Ready')
 });
@@ -123,18 +97,3 @@ client.on('message', async message => {
 const server = app.listen(PORT, () => {
     console.log(`Server listening to http://localhost:${PORT}`);
 })
-
-const keepAliveFunction = () => {
-    console.log('Keeping the server alive please')
-}
-
-const keepAliveInterval = setInterval(keepAliveFunction, 3000);
-
-process.on('SIGTERM', () => {
-    console.log('Received SIGTERM, shutting down server');
-    clearInterval(keepAliveInterval);
-    server.close(() => {
-        console.log('Server has been gracefully shut down');
-    });
-});
-
